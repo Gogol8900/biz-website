@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gogol | Фронтенд & Дизайн</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: white;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Светлая тема */
+    body.light {
+      background-color: #f5f5f5;
+      color: #121212;
+    }
+
+    header {
+      background-color: #121212;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease;
+    }
+    body.light header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    .menu a {
+      color: white;
+      margin-left: 24px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+    body.light .menu a {
+      color: #121212;
+    }
+
+    .menu a:hover {
+      color: #00ffff;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      min-height: 90vh;
+      text-align: center;
+      padding: 120px 20px 140px;
+      background-color: #1e1e1e;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+    body.light .hero {
+      background-color: #e0e7ff;
+      color: #121212;
+    }
+
+    .hero h2 {
+      font-size: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 28px;
+      font-weight: 400;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #4a90e2, #0077ff);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 119, 255, 0.5);
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(74, 144, 226, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);
+      }
+    }
+
+    .about-section {
+      padding: 80px 20px;
+      background-color: #181818;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.light .about-section {
+      background-color: #ffffff;
+      color: #121212;
+    }
+
+    .about-section h3 {
+      font-size: 40px;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 30px;
+    }
+
+    .about-section p {
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .skills {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto 60px;
+    }
+
+    .skill-card {
+      background: #2c2c2c;
+      border-radius: 12px;
+      padding: 20px 30px;
+      width: 140px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      color: white;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    body.light .skill-card {
+      background: #f0f0f0;
+      color: #121212;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .skill-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+      color: #4a90e2;
+    }
+    body.light .skill-icon {
+      color: #0055cc;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    #themeToggle {
+      background: transparent;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+      margin-left: 24px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    #themeToggle:hover {
+      background: #00ffff;
+      color: #121212;
+    }
+    body.light #themeToggle {
+      border-color: #0077ff;
+      color: #0077ff;
+    }
+    body.light #themeToggle:hover {
+      background: #0077ff;
+      color: white;
+    }
+
+    .about-image {
+      max-width: 600px;
+      width: 90%;
+      margin: 0 auto 60px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      display: block;
+      transition: box-shadow 0.3s ease;
+    }
+    .about-image:hover {
+      box-shadow: 0 12px 30px rgba(0,119,255,0.7);
+    }
+    body.light .about-image {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    body.light .about-image:hover {
+      box-shadow: 0 12px 30px rgba(0,119,255,0.4);
+    }
+
+    /* Адаптив */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 36px;
+      }
+      .hero p {
+        font-size: 20px;
+      }
+      .skills {
+        gap: 16px;
+      }
+      .skill-card {
+        width: 120px;
+        padding: 16px 20px;
+      }
+    }
+    .contact-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0077ff;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.5);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.contact-icon:hover {
+  transform: scale(1.1);
+}
+
+.contact-icon .tooltip {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.contact-icon .tooltip i {
+  margin-right: 8px;
+  color: #00ffff;
+}
+
+.contact-icon:hover .tooltip {
+  display: block;
+}
+.contact-card {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1e1e1e;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+}
+
+.contact-card p {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-card i {
+  color: #00ffff;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">Gogol — Веб & Дизайн</h1>
+    <nav class="menu">
+      <a href="#">Главная</a>
+      <a href="#aboutus" id="aboutLink">Обо мне</a>
+      <a href="#contact-card-anchor">Контакты</a>
+      <button id="themeToggle" aria-label="Переключить тему">Светлая тема</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Добро пожаловать!</h2>
+    <p>Создаю современные веб-сайты, стильные интерфейсы, фирменные логотипы и визуальные решения под ключ.</p>
+    <a href="#aboutus" id="btnMore" class="btn pulse">
+      <i class="fas fa-arrow-down"></i> Подробнее
+    </a>
+  </section>
+
+  <section id="aboutus" class="about-section">
+    <h3>О нас</h3>
+    <img
+      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80"
+      alt="Человек за компьютером"
+      class="about-image"
+      loading="lazy"
+    />
+    <p>
+      Я — фронтенд-разработчик и дизайнер с чувством стиля и вниманием к деталям. Наша цель — помогать бизнесам выглядеть современно, удобно и убедительно в интернете. Работаем с анимацией, адаптивной вёрсткой и UI-дизайном.
+    </p>
+    <div class="skills">
+      <div class="skill-card">
+        <i class="fab fa-html5 skill-icon" aria-hidden="true"></i>
+        <div class="skill-name">HTML5</div>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-css3-alt skill-icon" aria-hidden="true"></i>
+        <div class="skill-name">CSS3</div>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-js skill-icon" aria-hidden="true"></i>
+        <div class="skill-name">JavaScript</div>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-react skill-icon" aria-hidden="true"></i>
+        <div class="skill-name">React</div>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-paint-brush skill-icon" aria-hidden="true"></i>
+        <div class="skill-name">UI/UX Design</div>
+      </div>
+    </div>
+  </section>
+  <div id="contact-card-anchor">
+  <div class="contact-icon">
+    <i class="fas fa-address-card"></i>
+    <div class="tooltip">
+      <p><i class="fas fa-envelope"></i> imrangulamaliew@gmail.com</p>
+      <p><i class="fas fa-phone"></i> +993 (64) 18 64 48</p>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Инициализация темы из localStorage
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light');
+      themeToggleBtn.textContent = 'Темная тема';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light');
+      if (body.classList.contains('light')) {
+        themeToggleBtn.textContent = 'Темная тема';
+        localStorage.setItem('theme', 'light');
+      } else {
+        themeToggleBtn.textContent = 'Светлая тема';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Скролл к "Обо мне"
+    document.getElementById('aboutLink').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('aboutus').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('btnMore').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('aboutus').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
